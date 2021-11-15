@@ -8,3 +8,4 @@ This project is the backend of a system to allow a hairdressing to manages its r
 * Configuration files (like .env) are located in `etc/`.
 * Indentation are spaces of 2.
 * Code style is cammelCase.
+* EditorConfig file already has the coding styles configured, use it in the source-code editor or IDE.
