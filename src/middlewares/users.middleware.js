@@ -9,12 +9,12 @@ function checkSignupData(req, res, next) {
 
   let validator = new Validator()
   validator(req.body).required().isObject(obj => {
-    // admin: 0, hairdresser: 1, customer: 2
-    obj('user_type_id').required().isNumber().integer().isIncludedInArray([0, 1, 2])
+    // admin: 1, hairdresser: 2, customer: 3
+    obj('user_type_id').required().isNumber().integer().isIncludedInArray([1, 2, 3])
     obj('firstname').required().isString().lengthInRange(1, 64)
     obj('lastname').required().isString().lengthInRange(1, 64)
     obj('email').required().isString().isEmail().lengthInRange(1, 100)
-    obj('phone_number').isString().lengthInRange(1, 15)
+    obj('phone_number').isString().lengthInRange(1, 15).isMatch(/^[0-9]+$/)
     obj('passwd').required().isString().lengthInRange(1, 255)
   })
 

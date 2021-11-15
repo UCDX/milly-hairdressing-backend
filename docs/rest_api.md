@@ -46,9 +46,9 @@ POST
 #### Parameters
 
 * `user_type_id`: int. Valid options:
-  * `0`: for 'admin' user. 
-  * `1`: for 'hairdresser' user.
-  * `2`: for 'customer' user.
+  * `1`: for 'admin' user. 
+  * `2`: for 'hairdresser' user.
+  * `3`: for 'customer' user.
 * `firstname`: string. Max length: 64 characters.
 * `lastname`: string. Max length: 64 characters.
 * `email`: string. Max length: 100 characters.
@@ -64,7 +64,7 @@ POST
   ],
   "data": {
     "id": 4,
-    "user_type_id": 2,
+    "user_type_id": 3,
     "firstname": "Jhon 4",
     "lastname": "Doe 4",
     "email": "jhondoe4@gmail.com",
