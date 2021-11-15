@@ -16,7 +16,7 @@ create table users (
     lastname varchar(64) not null,
     email varchar(100) not null,
     phone_number varchar(15),
-    passwd varchar(255),
+    passwd varchar(255) not null,
     is_active tinyint not null default 1,
     
     foreign key(user_type_id) references user_types(id)
