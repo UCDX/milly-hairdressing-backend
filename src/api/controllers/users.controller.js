@@ -8,13 +8,16 @@ async function signup(req, res) {
 
     if (!result) {
       return res.status(400).json({
-        messages: ['Email already exists.']
+        code: 1,
+        messages: ['Email already registered'],
+        data: {}
       })
     }
 
     const token = cryptService.generateJWT({user_id: result.id})
 
     return res.status(200).json({
+      code: 0,
       messages: ['Done'],
       data: {
         id: result.id,
@@ -41,12 +44,17 @@ async function login(req, res) {
     const userId = await userService.login(email, passwd)
 
     if (!userId) {
-      return res.status(401).json({messages: ['Invalid credentials']})
+      return res.status(401).json({
+        code: 1,
+        messages: ['Invalid credentials'],
+        data: {}
+      })
     }
 
     const token = cryptService.generateJWT({user_id: userId})
 
     res.status(200).json({
+      code: 0,
       messages: ['Done'],
       data: {
         session_token: token
