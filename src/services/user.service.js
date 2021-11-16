@@ -51,6 +51,25 @@ async function signup(user) {
   }
 }
 
+/**
+ * Gets the user id only if the email exists and the password is correct.
+ * @param {string} email 
+ * @param {string} password 
+ * @returns {number | null}
+ */
+async function login(email, password) {
+  const query = `
+    SELECT id
+    FROM users
+    WHERE email = ? AND passwd = ?
+    LIMIT 1;
+  `
+  const result = await mariadb.query(query, [email, password])
+
+  return (!result[0] ? null : result[0].id)
+}
+
 module.exports = {
-  signup
+  signup,
+  login
 }

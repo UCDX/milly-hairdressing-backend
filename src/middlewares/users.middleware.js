@@ -26,6 +26,22 @@ function checkSignupData(req, res, next) {
   next()
 }
 
+function checkLoginData(req, res, next) {
+  let validator = new Validator()
+  validator(req.body).required().isObject(obj => {
+    obj('email').required().isString().isEmail().lengthInRange(1, 100)
+    obj('passwd').required().isString().lengthInRange(1, 255)
+  })
+
+  const errors = parseValidatorOutput(validator.run());
+  if (errors.length > 0) {
+    return res.status(400).json({ messages: errors })
+  }
+
+  next()
+}
+
 module.exports = {
-  checkSignupData
+  checkSignupData,
+  checkLoginData
 }
