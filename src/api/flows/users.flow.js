@@ -5,5 +5,9 @@ module.exports = {
   signup: [
     usersMidd.checkSignupData,
     usersCtrl.signup 
-  ]
+  ],
+  login: [
+    usersMidd.checkLoginData,
+    usersCtrl.login
+  ],
 }
