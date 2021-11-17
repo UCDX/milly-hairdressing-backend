@@ -12,7 +12,7 @@ if (result.error) {
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
-const general = require('./middlewares/general')
+const general = require('./middlewares/general.middleware')
 
 const app = express()
 
