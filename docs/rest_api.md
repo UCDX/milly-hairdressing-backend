@@ -5,6 +5,8 @@
 * [Users](#users)
   * [Sign up](#sign-up)
   * [Log in](#log-in)
+* [Hairdressing salon services](#hairdressing-salon-services)
+  * [Add service](#add-service)
 
 ## General information
 
@@ -121,3 +123,51 @@ POST
 #### Codes
 
 * 1: Invalid credentials.
+
+## Hairdressing salon services
+
+### Add service
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+POST
+
+#### Endpoint
+
+`/api/services/add`
+
+#### Parameters
+
+* `service_name`: string. Max length: 100 characters.
+* `cost`: float. 
+* `service_description`: string.
+* `short_description`: string. Max length: 100 characters.
+* `service_duration`: int.
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "id": 14,
+    "service_name": "Manicure Express",
+    "cost": 60,
+    "service_description": "Manicure Express",
+    "short_description": "Manicure Express",
+    "service_duration": 1,
+    "is_active": 1
+  }
+}
+```
+
+#### Codes
+
+* 1: Forbidden. User unauthorized.
