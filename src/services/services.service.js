@@ -48,6 +48,27 @@ async function addService(serviceData, userId) {
   }
 }
 
+/**
+ * Return all the hairdressing salon services registered in the DB.
+ * @returns {Object}
+ *  - total_records: number
+ *  - services: array of objects. Services records
+ */
+async function getAllServices() {
+  const servicesQuery = `SELECT * FROM services;`
+  const servicesResult = await mariadb.query(servicesQuery)
+
+  const countQuery = `SELECT COUNT(*) AS total_records FROM services;`
+  let countResult = await mariadb.query(countQuery)
+  countResult = countResult[0]
+
+  return {
+    total_records: countResult ? countResult.total_records : 0,
+    services: servicesResult
+  }
+}
+
 module.exports = {
-  addService
+  addService,
+  getAllServices
 }

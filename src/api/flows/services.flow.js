@@ -7,5 +7,9 @@ module.exports = {
     generalMidd.userAuth,
     servicesMidd.checkNewServiceData,
     servicesCtrl.addService 
+  ],
+
+  getAllServices: [
+    servicesCtrl.getAllServices
   ]
 }
