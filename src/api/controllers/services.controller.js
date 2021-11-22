@@ -23,6 +23,22 @@ async function addService(req, res) {
   }
 }
 
+async function getAllServices(req, res) {
+  try {
+    const result = await serviceServices.getAllServices()
+
+    return res.status(200).json({
+      code: 0,
+      messages: ['Done'],
+      data: result
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).end()
+  }
+}
+
 module.exports = {
-  addService
+  addService,
+  getAllServices
 }

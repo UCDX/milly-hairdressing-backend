@@ -7,6 +7,7 @@
   * [Log in](#log-in)
 * [Hairdressing salon services](#hairdressing-salon-services)
   * [Add service](#add-service)
+  * [Get all services](#get-all-services)
 
 ## General information
 
@@ -171,3 +172,60 @@ POST
 #### Codes
 
 * 1: Forbidden. User unauthorized.
+
+
+### Get all services
+
+#### Headers
+
+Not more than the mandatories.
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/api/services/get-all`
+
+#### Parameters
+
+None
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "total_records": 2,
+    "services": [
+      {
+        "id": 20,
+        "service_name": "Corte de cabello para Caballero",
+        "cost": 60,
+        "service_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate ex. Cras id ipsum viverra, fermentum ipsum sed, lacinia ex. Nunc nec neque congue, consectetur massa sit amet, interdum augue. Fusce rutrum sapien vitae mauris aliquet commodo. Integer vel ipsum vitae nisl porttitor lacinia id tincidunt est. ",
+        "short_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "service_duration": 1,
+        "is_active": 1
+      },
+      {
+        "id": 21,
+        "service_name": "Corte de cabello para Dama",
+        "cost": 100,
+        "service_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate ex. Cras id ipsum viverra, fermentum ipsum sed, lacinia ex. Nunc nec neque congue, consectetur massa sit amet, interdum augue. Fusce rutrum sapien vitae mauris aliquet commodo. Integer vel ipsum vitae nisl porttitor lacinia id tincidunt est. ",
+        "short_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "service_duration": 1,
+        "is_active": 1
+      }
+    ]
+  }
+}
+```
+
+#### Codes
+
+None
