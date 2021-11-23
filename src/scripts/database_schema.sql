@@ -37,19 +37,11 @@ create table reservations (
     user_id int unsigned not null,
     service_id int unsigned not null,
     reservation_date date not null,
-    reservation_time time not null,
+	start_time time not null,
+    end_time time not null,
     
     foreign key(user_id) references users(id),
     foreign key(service_id) references services(id)
-);
-
-create table blocked_time (
-	id int unsigned primary key auto_increment,
-    reservation_id int unsigned not null,
-    start_time time not null,
-    end_time time not null,
-    
-    foreign key(reservation_id) references reservations(id)
 );
 
 # initial setup

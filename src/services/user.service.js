@@ -68,8 +68,61 @@ async function login(email, password) {
 
   return (!result[0] ? null : result[0].id)
 }
+/**
+ * Insert a reservation in a data base
+ * @param {int} user_id 
+ * @param {int} service_id 
+ * @param {string} reservation_date 
+ * @param {string} start_time 
+ */
+async function addReservation(user_id, service_id, reservation_date, start_time) {
+
+  const serviceDurationQuery = "SELECT service_duration FROM services WHERE id = ?;"
+  const serviceDurationResult = await mariadb.query(serviceDurationQuery,[service_id])
+  const serviceDuration = serviceDurationResult[0].service_duration
+
+  const hourString = start_time.slice(0, 2)
+  const endHourInt = parseInt(hourString) + serviceDuration
+  let end_time
+  if(endHourInt < 10)
+    end_time = '0' + String(endHourInt) + ':00:00'
+  else
+    end_time = String(endHourInt) + ':00:00'
+
+  const reservationsQuery = "SELECT * FROM reservations WHERE reservation_date = ?";
+  const reservationResult = await mariadb.query(reservationsQuery,[reservation_date])
+  
+  for (const reservation of reservationResult) {
+    if(start_time < reservation.end_time && end_time > reservation.start_time){
+      return null
+    }
+  }
+
+  const makeReservationQuery = `
+    INSERT INTO reservations (
+      user_id,
+      service_id,
+      reservation_date,
+      start_time,
+      end_time
+    )
+    VALUES (?, ?, ?, ?, ?); 
+  `
+
+  let arguments = [user_id, service_id, reservation_date, start_time, end_time]
+  const result = await mariadb.query(makeReservationQuery, arguments)
+
+  return {
+    id: result.insertId,
+    service_id,
+    reservation_date,
+    start_time,
+    end_time
+  }
+}
 
 module.exports = {
   signup,
-  login
+  login,
+  addReservation
 }

@@ -125,6 +125,48 @@ POST
 
 * 1: Invalid credentials.
 
+### Create Reservation
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+POST
+
+#### Endpoint
+
+`/api/users/create-reservation`
+
+#### Parameters
+
+* `service_id`: int
+* `reservation_date`: string. Format: 'YYYY-MM-DD'
+* `start_time`: string. Format: 'HH:MM:SS'
+
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "id": 11,
+    "service_id": 1,
+    "reservation_date": "2021-11-22",
+    "start_time": "15:00:00",
+    "end_time": "17:00:00"
+  }
+}
+```
+#### Codes
+
+* 1: Schedule conflict.
+
 ## Hairdressing salon services
 
 ### Add service
