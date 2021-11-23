@@ -83,10 +83,14 @@ async function addReservation(user_id, service_id, reservation_date, start_time)
 
   const hourString = start_time.slice(0, 2)
   const endHourInt = parseInt(hourString) + serviceDuration
-  const end_time = String(endHourInt) + ':00:00'
+  let end_time
+  if(endHourInt < 10)
+    end_time = '0' + String(endHourInt) + ':00:00'
+  else
+    end_time = String(endHourInt) + ':00:00'
 
-  const reservationsQuery = "SELECT * FROM reservations WHERE user_id = ? AND reservation_date = ?";
-  const reservationResult = await mariadb.query(reservationsQuery,[user_id,reservation_date])
+  const reservationsQuery = "SELECT * FROM reservations WHERE reservation_date = ?";
+  const reservationResult = await mariadb.query(reservationsQuery,[reservation_date])
   
   for (const reservation of reservationResult) {
     if(start_time < reservation.end_time && end_time > reservation.start_time){
