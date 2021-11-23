@@ -66,7 +66,34 @@ async function login(req, res) {
   }
 }
 
+async function addReservation(req, res) {
+  try {
+    const reservation = await userService.addReservation(
+      req.api.user_id,
+      req.body.service_id,
+      req.body.reservation_date,
+      req.body.start_time
+    )
+    if(!reservation){
+      return res.status(400).json({
+        code: 1,
+        messages: ['Schedule conflict'],
+        data: {}
+      })
+    }
+    return res.status(200).json({
+      code: 0,
+      messages: ['Done'],
+      data: reservation
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).end()
+  }
+}
+
 module.exports = {
   signup,
-  login
+  login,
+  addReservation
 }

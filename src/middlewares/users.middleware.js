@@ -41,7 +41,25 @@ function checkLoginData(req, res, next) {
   next()
 }
 
+function checkNewReservation(req, res, next) {
+
+  let validator = new Validator()
+  validator(req.body).required().isObject(obj => {
+    obj('service_id').required().isNumber().integer()
+    obj('reservation_date').required().isString().isDate()
+    obj('start_time').required().isString()
+  })
+      
+  const errors = parseValidatorOutput(validator.run());
+  if (errors.length > 0) {
+    return res.status(400).json({ messages: errors })
+  }
+
+  next()
+}
+
 module.exports = {
   checkSignupData,
-  checkLoginData
+  checkLoginData,
+  checkNewReservation
 }

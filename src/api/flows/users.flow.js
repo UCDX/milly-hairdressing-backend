@@ -1,5 +1,6 @@
 const usersMidd = require('../../middlewares/users.middleware')
 const usersCtrl = require('../controllers/users.controller')
+const generalMidd = require('../../middlewares/general.middleware')
 
 module.exports = {
   signup: [
@@ -10,4 +11,10 @@ module.exports = {
     usersMidd.checkLoginData,
     usersCtrl.login
   ],
+
+  addReservation: [
+    generalMidd.userAuth,
+    usersMidd.checkNewReservation,
+    usersCtrl.addReservation
+]
 }
