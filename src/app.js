@@ -13,7 +13,6 @@ if (process.env.NODE_ENV === 'development') {
 
 // Including dependencies.
 const express = require('express')
-const morgan = require('morgan')
 const cors = require('cors')
 const general = require('./middlewares/general.middleware')
 
@@ -24,7 +23,10 @@ app.use(cors({ origin: '*', optionsSuccessStatus: 200 }))
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(general.apiSection)
-app.use(morgan('dev'))
+if (process.env.NODE_ENV === 'development') {
+  const morgan = require('morgan')
+  app.use(morgan('dev'))
+}
 app.use('/api', require('./api/interfaces'))
 
 module.exports = app
