@@ -1,5 +1,5 @@
 {
   "db": {
-    "conn_limit": 20
+    "conn_limit": 10
   }
 }
