@@ -1,5 +1,27 @@
 const mariadb = require('./mariadb.service')
 
+async function userInformation(userId) {
+  const query = `
+    SELECT
+      users.id,
+      users.firstname,
+      users.lastname,
+      users.email,
+      users.phone_number,
+      users.is_active,
+      users.user_type_id,
+      user_types.type_name,
+      user_types.type_code
+    FROM users
+    INNER JOIN user_types
+    ON users.user_type_id = user_types.id
+    WHERE users.id = ?;
+  `
+
+  const result = await mariadb.query(query, [userId])
+  return result[0]
+}
+
 /**
  * Creates a new user user in the system.
  * @param {*} user An object with:
@@ -39,16 +61,7 @@ async function signup(user) {
   
   const signupResult = await mariadb.query(query, arguments)
 
-  return {
-    id: signupResult.insertId,
-    user_type_id: user.user_type_id,
-    firstname: user.firstname,
-    lastname: user.lastname,
-    email: user.email,
-    phone_number: user.phone_number,
-    passwd: user.passwd,
-    is_active: 1
-  }
+  return signupResult.insertId
 }
 
 /**
@@ -124,5 +137,6 @@ async function addReservation(user_id, service_id, reservation_date, start_time)
 module.exports = {
   signup,
   login,
-  addReservation
+  addReservation,
+  userInformation
 }
