@@ -72,14 +72,16 @@ POST
     "Done"
   ],
   "data": {
-    "id": 4,
-    "user_type_id": 3,
-    "firstname": "Jhon 4",
-    "lastname": "Doe 4",
-    "email": "jhondoe4@gmail.com",
-    "phone_number": "9988776655",
+    "id": 21,
+    "firstname": "Jhon",
+    "lastname": "customer",
+    "email": "jhon_customer@gmail.com",
+    "phone_number": "9911223344",
     "is_active": 1,
-    "session_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0fQ.bnLkXbzeQ-khip0e9B46fbUEfVXG2AN099SwzNKev-s"
+    "user_type_id": 3,
+    "type_name": "Cliente",
+    "type_code": "customer",
+    "session_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMX0.3qxyQGOJACltjdakaULv2-IPKdSX0B7ZOB6yW9wUOrk"
   }
 }
 ```
@@ -116,7 +118,16 @@ POST
     "Done"
   ],
   "data": {
-    "session_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo5fQ.FjF8D4Q9LQ9siUXky_mHSS4K28VsEZqzlFRbM5rp-tQ"
+    "id": 21,
+    "firstname": "Jhon",
+    "lastname": "customer",
+    "email": "jhon_customer@gmail.com",
+    "phone_number": "9911223344",
+    "is_active": 1,
+    "user_type_id": 3,
+    "type_name": "Cliente",
+    "type_code": "customer",
+    "session_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyMX0.3qxyQGOJACltjdakaULv2-IPKdSX0B7ZOB6yW9wUOrk"
   }
 }
 ```

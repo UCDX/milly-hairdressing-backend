@@ -4,9 +4,9 @@ const userService = require('../../services/user.service')
 async function signup(req, res) {
   req.body.passwd = cryptService.hash(req.body.passwd)
   try {
-    const result = await userService.signup(req.body)
+    const userId = await userService.signup(req.body)
 
-    if (!result) {
+    if (!userId) {
       return res.status(400).json({
         code: 1,
         messages: ['Email already registered'],
@@ -14,19 +14,14 @@ async function signup(req, res) {
       })
     }
 
-    const token = cryptService.generateJWT({user_id: result.id})
+    const userInformation = await userService.userInformation(userId)
+    const token = cryptService.generateJWT({user_id: userId})
 
     return res.status(200).json({
       code: 0,
       messages: ['Done'],
       data: {
-        id: result.id,
-        user_type_id: req.body.user_type_id,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname,
-        email: req.body.email,
-        phone_number: req.body.phone_number || '',
-        is_active: result.is_active,
+        ...userInformation,
         session_token: token
       }
     })
@@ -51,12 +46,14 @@ async function login(req, res) {
       })
     }
 
+    const userInformation = await userService.userInformation(userId)
     const token = cryptService.generateJWT({user_id: userId})
 
     res.status(200).json({
       code: 0,
       messages: ['Done'],
       data: {
+        ...userInformation,
         session_token: token
       }
     })
