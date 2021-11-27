@@ -19,7 +19,10 @@ function checkNewServiceData(req, res, next) {
 
   const errors = parseValidatorOutput(validator.run());
   if (errors.length > 0) {
-    return res.status(400).json({ messages: errors })
+    return res.status(400).finish({
+      code: -1,
+      messages: errors
+    })
   }
 
   next()
