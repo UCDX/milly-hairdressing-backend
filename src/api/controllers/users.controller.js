@@ -7,7 +7,7 @@ async function signup(req, res) {
     const userId = await userService.signup(req.body)
 
     if (!userId) {
-      return res.status(400).json({
+      return res.status(400).finish({
         code: 1,
         messages: ['Email already registered'],
         data: {}
@@ -17,7 +17,7 @@ async function signup(req, res) {
     const userInformation = await userService.userInformation(userId)
     const token = cryptService.generateJWT({user_id: userId})
 
-    return res.status(200).json({
+    return res.status(200).finish({
       code: 0,
       messages: ['Done'],
       data: {
@@ -39,7 +39,7 @@ async function login(req, res) {
     const userId = await userService.login(email, passwd)
 
     if (!userId) {
-      return res.status(401).json({
+      return res.status(401).finish({
         code: 1,
         messages: ['Invalid credentials'],
         data: {}
@@ -49,7 +49,7 @@ async function login(req, res) {
     const userInformation = await userService.userInformation(userId)
     const token = cryptService.generateJWT({user_id: userId})
 
-    res.status(200).json({
+    res.status(200).finish({
       code: 0,
       messages: ['Done'],
       data: {
@@ -72,13 +72,13 @@ async function addReservation(req, res) {
       req.body.start_time
     )
     if(!reservation){
-      return res.status(400).json({
+      return res.status(400).finish({
         code: 1,
         messages: ['Schedule conflict'],
         data: {}
       })
     }
-    return res.status(200).json({
+    return res.status(200).finish({
       code: 0,
       messages: ['Done'],
       data: reservation
