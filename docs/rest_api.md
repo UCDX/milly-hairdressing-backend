@@ -11,6 +11,18 @@
 
 ## General information
 
+### General codes
+
+* 0: Success.
+
+#### Error codes
+
+This kind of codes are negative numbers. They represents errors with the data provided by the client.
+
+* -1: Params are not corrects.
+* -2: Authentication is missing.
+* -3: Error while decoding token.
+
 ### Response data structure
 
 ```json
@@ -21,9 +33,8 @@
 }
 ```
 
-* `code`: The exit code of the process. Code `0` represents the sucesfully exit code linked to '*Done*'
-message. Each endpoint could has their respective exit codes, see the **Codes** section in order to know 
-the possible exits codes and their respective message.
+* `code`: The exit code of the process. Each endpoint could has their respective exit codes, see the
+**Codes** section in order to know the possible exits codes and their respective message.
 * `messages`: A message array to help the programmer to identify easier what happened with the process.
 * `data`: The data requested, or the data returned **when the execution was correct**.
 
