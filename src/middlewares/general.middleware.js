@@ -1,5 +1,9 @@
 const EventEmitter = require('events')
 const cryptService = require('../services/crypt.service')
+const { 
+  Validator, 
+  parseNumberFromGroupIfApplic,
+  parseValidatorOutput } = require('../services/validator.service')
 
 /**
  * Set an event emitter to response.api.events and
@@ -48,8 +52,30 @@ function userAuth(req, res, next) {
   }
 }
 
+function checkPaginationParams(req, res, next) {
+  let validator = new Validator()
+  req.query = parseNumberFromGroupIfApplic(req.query)
+
+  validator(req.query).isObject(obj => {
+    obj('offset').isNumber().integer().isPositive()
+    obj('page').isNumber().integer().notNegative()
+  })
+
+  let errors = parseValidatorOutput(validator.run())
+  if(errors.length != 0) {
+    return res.status(400).finish({
+      code: -1,
+      messages: errors
+    })
+  }
+
+  next()
+}
+
+
 module.exports = {
   setResponseFormat,
   apiSection,
-  userAuth
+  userAuth,
+  checkPaginationParams
 }

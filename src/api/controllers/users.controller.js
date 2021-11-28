@@ -89,8 +89,29 @@ async function addReservation(req, res) {
   }
 }
 
+async function getUserApp(req, res) {
+  try {
+    const reservations = await userService.getUserApp(
+      req.api.user_id,
+      req.query.offset,
+      req.query.page
+    )
+    return res.status(200).finish({
+      code: 0,
+      messages: ['Done'],
+      data: {
+        reservations: reservations || []
+      }
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).end()
+  }
+}
+
 module.exports = {
   signup,
   login,
-  addReservation
+  addReservation,
+  getUserApp
 }

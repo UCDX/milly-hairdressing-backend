@@ -5,6 +5,7 @@
 * [Users](#users)
   * [Sign up](#sign-up)
   * [Log in](#log-in)
+  * [Get all user reservations](#get-all-user-reservations)
 * [Hairdressing salon services](#hairdressing-salon-services)
   * [Add service](#add-service)
   * [Get all services](#get-all-services)
@@ -290,6 +291,59 @@ None
 }
 ```
 
+#### Codes
+
+None
+
+### Get all user reservations
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/api/users/get-user-appointments`
+
+#### Parameters
+
+None
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "reservations": [
+      {
+        "id_reservation": 12,
+        "user_id": 3,
+        "firstname": "Jason",
+        "lastname": "Bone",
+        "reservation_date": "2021-11-27T05:00:00.000Z",
+        "start_time": "15:00:00",
+        "end_time": "17:00:00",
+        "service_id": 1,
+        "service_name": "Manicure Express",
+        "cost": 60,
+        "service_description": "Manicure Express",
+        "service_short_desc": "Manicure Express",
+        "service_duration": 2,
+        "is_service_active": 1
+      }
+    ]
+  }
+}
+}
+```
 #### Codes
 
 None

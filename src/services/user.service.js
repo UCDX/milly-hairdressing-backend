@@ -134,9 +134,51 @@ async function addReservation(user_id, service_id, reservation_date, start_time)
   }
 }
 
+/**
+ * Retrieves all reservations made for a user.
+ * @param {int} userId 
+ * @param {int} offset
+ * @param {int} page 
+ * @returns 
+ /** */
+
+async function getUserApp(userId, offset = 10, page = 0) {
+
+  const query = `
+    SELECT 
+      reservations.id AS id_reservation,
+      users.id AS user_id,
+      users.firstname,
+      users.lastname,
+      reservations.reservation_date,
+      reservations.start_time,
+      reservations.end_time,
+      services.id AS service_id,
+      services.service_name,
+      services.cost,
+      services.service_description,
+      services.short_description AS service_short_desc,
+      services.service_duration,
+      services.is_active AS is_service_active
+    FROM reservations
+    INNER JOIN users
+      ON reservations.user_id = users.id
+    INNER JOIN services
+      ON reservations.service_id = services.id
+    WHERE users.id = ?
+    ORDER BY reservations.reservation_date DESC
+    LIMIT ?, ?;
+  `
+  const result = await mariadb.query(query, [userId, (page*offset), offset])
+  
+  return result
+}
+
+
 module.exports = {
   signup,
   login,
   addReservation,
-  userInformation
+  userInformation,
+  getUserApp
 }

@@ -16,5 +16,12 @@ module.exports = {
     generalMidd.userAuth,
     usersMidd.checkNewReservation,
     usersCtrl.addReservation
-]
+  ],
+
+  getUserAppointments: [
+     generalMidd.userAuth,
+     generalMidd.checkPaginationParams,
+     usersCtrl.getUserApp
+    
+  ]
 }
