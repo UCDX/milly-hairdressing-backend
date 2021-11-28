@@ -5,9 +5,12 @@
 * [Users](#users)
   * [Sign up](#sign-up)
   * [Log in](#log-in)
+  * [Create Reservation](#create-reservation)
 * [Hairdressing salon services](#hairdressing-salon-services)
   * [Add service](#add-service)
   * [Get all services](#get-all-services)
+* [Reservations](#reservations)
+  * [Get blocked time](#get-blocked-time)
 
 ## General information
 
@@ -284,6 +287,57 @@ None
         "short_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "service_duration": 1,
         "is_active": 1
+      }
+    ]
+  }
+}
+```
+
+#### Codes
+
+None
+
+## Reservations
+
+### Get blocked time
+
+#### Headers
+
+None
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/api/reservations/blocked-time`
+
+#### Parameters
+
+* `date`: string. Format: 'YYYY-MM-DD'
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "reservations": [
+      {
+        "start_time": "10:00:00",
+        "end_time": "12:00:00"
+      },
+      {
+        "start_time": "12:00:00",
+        "end_time": "13:00:00"
+      },
+      {
+        "start_time": "13:00:00",
+        "end_time": "16:00:00"
       }
     ]
   }
