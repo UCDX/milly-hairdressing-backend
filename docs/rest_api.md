@@ -6,9 +6,12 @@
   * [Sign up](#sign-up)
   * [Log in](#log-in)
   * [Get all user reservations](#get-all-user-reservations)
+  * [Create Reservation](#create-reservation)
 * [Hairdressing salon services](#hairdressing-salon-services)
   * [Add service](#add-service)
   * [Get all services](#get-all-services)
+* [Reservations](#reservations)
+  * [Get blocked time](#get-blocked-time)
 
 ## General information
 
@@ -295,11 +298,21 @@ None
 
 None
 
+<<<<<<< HEAD
 ### Get all user reservations
 
 #### Headers
 
 * `Authorization`
+=======
+## Reservations
+
+### Get blocked time
+
+#### Headers
+
+None
+>>>>>>> 23e25f7acfb4e88497a26083c6c262683a03eb93
 
 #### Method
 
@@ -307,11 +320,19 @@ GET
 
 #### Endpoint
 
+<<<<<<< HEAD
 `/api/users/get-user-appointments`
 
 #### Parameters
 
 None
+=======
+`/api/reservations/blocked-time`
+
+#### Parameters
+
+* `date`: string. Format: 'YYYY-MM-DD'
+>>>>>>> 23e25f7acfb4e88497a26083c6c262683a03eb93
 
 #### Response example
 
@@ -324,6 +345,7 @@ None
   "data": {
     "reservations": [
       {
+<<<<<<< HEAD
         "id_reservation": 12,
         "user_id": 3,
         "firstname": "Jason",
@@ -338,12 +360,29 @@ None
         "service_short_desc": "Manicure Express",
         "service_duration": 2,
         "is_service_active": 1
+=======
+        "start_time": "10:00:00",
+        "end_time": "12:00:00"
+      },
+      {
+        "start_time": "12:00:00",
+        "end_time": "13:00:00"
+      },
+      {
+        "start_time": "13:00:00",
+        "end_time": "16:00:00"
+>>>>>>> 23e25f7acfb4e88497a26083c6c262683a03eb93
       }
     ]
   }
 }
+<<<<<<< HEAD
 }
 ```
+=======
+```
+
+>>>>>>> 23e25f7acfb4e88497a26083c6c262683a03eb93
 #### Codes
 
 None

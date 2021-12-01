@@ -173,7 +173,6 @@ async function getUserApp(userId, offset = 10, page = 0) {
 
   const n_results = await mariadb.query(queryN, [userId])
   const result = await mariadb.query(query, [userId, (page*offset), offset])
-  const fResult = n_results.concat(result)
   
   return {
     reservations: result,
