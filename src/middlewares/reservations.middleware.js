@@ -6,6 +6,8 @@ const {
 
 function checkDate(req, res, next) {
 
+  req.body.date = req.params.date
+
   let validator = new Validator()
   validator(req.body).required().isObject(obj => {
     obj('date').required().isString().isDate()
@@ -23,6 +25,8 @@ function checkDate(req, res, next) {
 }
 
 function checkReservationId(req, res, next) {
+
+  req.body.reservation_id = req.params.reservation_id
 
   req.body.reservation_id = parseNumberIfApplicable(req.body.reservation_id, toFloat = false)
 
