@@ -23,11 +23,5 @@ module.exports = {
      generalMidd.checkPaginationParams,
      usersCtrl.getUserApp
     
-  ],
-
-  deleteReservation: [
-    generalMidd.userAuth,
-    usersCtrl.deleteReservation
   ]
-
 }
