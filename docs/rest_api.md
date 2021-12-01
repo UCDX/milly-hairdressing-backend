@@ -524,7 +524,7 @@ DELETE
 
 #### Endpoint
 
-`/api/reservations/cancel-reservation`
+`/api/reservations/cancel-reservation/:reservation_id`
 
 #### Parameters
 
