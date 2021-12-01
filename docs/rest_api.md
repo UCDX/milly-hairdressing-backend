@@ -12,6 +12,7 @@
   * [Get all services](#get-all-services)
 * [Reservations](#reservations)
   * [Get blocked time](#get-blocked-time)
+  * [Get reservations of certain day](#get-reservations-of-certain-day)
 
 ## General information
 
@@ -280,6 +281,8 @@ None
 
 ### Add service
 
+Only admin users can add a service.
+
 #### Headers
 
 * `Authorization`
@@ -431,3 +434,76 @@ GET
 #### Codes
 
 None
+
+### Get reservations of certain day
+
+Reservations are responded in ascending order by start time.
+
+Only admin users can request these reservations.
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/api/reservations/by-day`
+
+#### Parameters
+
+* `date`: string. Format: 'YYYY-MM-DD'
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "reservations": [
+      {
+        "id_reservation": 6,
+        "user_id": 22,
+        "firstname": "Jhon",
+        "lastname": "customer",
+        "reservation_date": "2021-12-01T05:00:00.000Z",
+        "start_time": "11:00:00",
+        "end_time": "14:00:00",
+        "service_id": 24,
+        "service_name": "Aplicación de tinte",
+        "cost": 250,
+        "service_description": "Lorem ipsum.",
+        "service_short_desc": "Lorem ipsum",
+        "service_duration": 3,
+        "is_service_active": 1
+      },
+      {
+        "id_reservation": 5,
+        "user_id": 21,
+        "firstname": "Jhon",
+        "lastname": "customer",
+        "reservation_date": "2021-12-01T05:00:00.000Z",
+        "start_time": "16:00:00",
+        "end_time": "17:00:00",
+        "service_id": 21,
+        "service_name": "Corte de cabello para Dama",
+        "cost": 100,
+        "service_description": "Lorem ipsum",
+        "service_short_desc": "Lorem ipsum",
+        "service_duration": 1,
+        "is_service_active": 1
+      }
+    ]
+  }
+}
+```
+
+#### Codes
+
+* 1: Forbidden. User unauthorized.
