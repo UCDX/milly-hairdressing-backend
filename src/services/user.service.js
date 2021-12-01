@@ -166,7 +166,9 @@ async function getUserApp(userId, offset = 10, page = 0) {
     INNER JOIN services
       ON reservations.service_id = services.id
     WHERE users.id = ?
-    ORDER BY reservations.reservation_date DESC
+    ORDER BY 
+      reservations.reservation_date DESC,
+      reservations.start_time DESC
     Limit ?,?;
   `
   const queryN = `SELECT count(*) AS total_records FROM reservations WHERE user_id = ?;`
