@@ -1,4 +1,5 @@
 const reservationService = require('../../services/reservation.service')
+const userService = require('../../services/user.service')
 
 async function getBlockedTime(req, res) {
   try {
@@ -33,6 +34,34 @@ async function getBlockedTime(req, res) {
   }
 }
 
+async function reservationsByDate(req, res) {
+  try {
+    const isAdminUser = await userService.isAdminUser(req.api.user_id)
+
+    if (!isAdminUser) {
+      return res.status(403).finish({
+        code: 1,
+        messages: ['Forbidden. User unauthorized'],
+        data: {}
+      })
+    }
+
+    const reservations = await reservationService.getReservations(req.body.date)
+
+    return res.status(200).finish({
+      code: 0,
+      messages: ['Done'],
+      data: {
+        reservations: reservations || []
+      }
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).end()
+  }
+}
+
 module.exports = {
-  getBlockedTime
+  getBlockedTime,
+  reservationsByDate
 }

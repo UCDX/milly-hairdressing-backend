@@ -183,11 +183,28 @@ async function getUserApp(userId, offset = 10, page = 0) {
 
 }
 
+/**
+ * Validate if user id belongs to a Admin user.
+ */
+async function isAdminUser(userId) {
+  const q = `
+    SELECT user_types.type_code
+    FROM users
+    INNER JOIN user_types
+      ON users.user_type_id = user_types.id
+    WHERE users.id = ?;
+  `
+
+  const userInfoResult = await mariadb.query(q, [userId])
+  return (userInfoResult[0].type_code == 'admin')
+}
+
 
 module.exports = {
   signup,
   login,
   addReservation,
   userInformation,
-  getUserApp
+  getUserApp,
+  isAdminUser
 }
