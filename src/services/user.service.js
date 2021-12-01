@@ -199,6 +199,30 @@ async function isAdminUser(userId) {
   return (userInfoResult[0].type_code == 'admin')
 }
 
+/**
+ * Validate if user id belongs to a Admin user.
+ */
+ async function isHairdresserUser(userId) {
+  const q = `
+    SELECT user_types.type_code
+    FROM users
+    INNER JOIN user_types
+      ON users.user_type_id = user_types.id
+    WHERE users.id = ?;
+  `
+
+  const userInfoResult = await mariadb.query(q, [userId])
+  return (userInfoResult[0].type_code == 'hairdresser')
+}
+
+async function isUserOwner(userId,reservation_id) {
+
+  const Query = "SELECT user_id FROM reservations WHERE id = ?;"
+  const Result = await mariadb.query(Query,[reservation_id])
+  const idUserReservation = Result[0].user_id
+ 
+  return (idUserReservation == userId)
+}
 
 module.exports = {
   signup,
@@ -206,5 +230,7 @@ module.exports = {
   addReservation,
   userInformation,
   getUserApp,
-  isAdminUser
+  isAdminUser,
+  isHairdresserUser,
+  isUserOwner
 }

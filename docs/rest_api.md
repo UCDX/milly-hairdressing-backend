@@ -13,6 +13,7 @@
 * [Reservations](#reservations)
   * [Get blocked time](#get-blocked-time)
   * [Get reservations of certain day](#get-reservations-of-certain-day)
+  * [Delete reservation](#delete-reservation)
 
 ## General information
 
@@ -507,3 +508,42 @@ GET
 #### Codes
 
 * 1: Forbidden. User unauthorized.
+
+### Delete reservation
+
+Delete reservations only by admin/hairdresser users requesting or if the user requesting is the owner of the reservation.
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+DELETE
+
+#### Endpoint
+
+`/api/reservations/cancel-reservation`
+
+#### Parameters
+
+* `reservation_id`: int.
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "reservation_id": 21
+  }
+}
+```
+
+#### Codes
+
+ * 1: Forbidden. User unauthorized.
+ * 2: The day is already passed or is today.
