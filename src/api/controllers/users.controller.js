@@ -99,9 +99,7 @@ async function getUserApp(req, res) {
     return res.status(200).finish({
       code: 0,
       messages: ['Done'],
-      data: {
-        reservations: reservations || []
-      }
+      data:reservations 
     })
   } catch (err) {
     console.error(err)

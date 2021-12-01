@@ -145,7 +145,7 @@ async function addReservation(user_id, service_id, reservation_date, start_time)
 async function getUserApp(userId, offset = 10, page = 0) {
 
   const query = `
-    SELECT 
+    SELECT
       reservations.id AS id_reservation,
       users.id AS user_id,
       users.firstname,
@@ -167,11 +167,19 @@ async function getUserApp(userId, offset = 10, page = 0) {
       ON reservations.service_id = services.id
     WHERE users.id = ?
     ORDER BY reservations.reservation_date DESC
-    LIMIT ?, ?;
+    Limit ?,?;
   `
+  const queryN = `SELECT count(*) AS total_records FROM reservations WHERE user_id = ?;`
+
+  const n_results = await mariadb.query(queryN, [userId])
   const result = await mariadb.query(query, [userId, (page*offset), offset])
+  const fResult = n_results.concat(result)
   
-  return result
+  return {
+    reservations: result,
+    total_records: n_results[0].total_records
+  }
+
 }
 
 
