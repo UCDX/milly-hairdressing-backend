@@ -97,8 +97,37 @@ async function deleteReservation(req, res) {
   }
 }
 
+async function specificReservation(req, res) {
+  try {
+    const isAdminUser = await userService.isAdminUser(req.api.user_id)
+    const isHairdresserUser = await userService.isHairdresserUser(req.api.user_id)
+    const isUserOwner = await userService.isUserOwner(req.api.user_id,req.body.reservation_id)
+    
+    if(!isAdminUser && !isHairdresserUser && !isUserOwner){
+      return res.status(403).finish({
+        code: 1,
+        messages: ['Forbidden. User unauthorized'],
+        data: {}
+      })
+    }
+    const specificReservationResult = await reservationService.specificReservation(  
+      req.body.reservation_id
+    )
+    return res.status(200).finish({
+      code: 0,
+      messages: ['Done'],
+      data:specificReservationResult|| []
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).end()
+  }
+}
+
+
 module.exports = {
   getBlockedTime,
   reservationsByDate,
-  deleteReservation
+  deleteReservation,
+  specificReservation
 }
