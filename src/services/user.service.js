@@ -219,7 +219,8 @@ async function isUserOwner(userId,reservation_id) {
 
   const Query = "SELECT user_id FROM reservations WHERE id = ?;"
   const Result = await mariadb.query(Query,[reservation_id])
-  const idUserReservation = Result[0].user_id
+
+  const idUserReservation = Result[0] ? Result[0].user_id : null
  
   return (idUserReservation == userId)
 }
