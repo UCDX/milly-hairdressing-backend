@@ -2,6 +2,7 @@ const {
   Validator, 
   parseValidatorOutput,
   parseNumberIfApplicable,
+  parseNumberFromGroupIfApplic,
 } = require('../services/validator.service')
 
 function checkSignupData(req, res, next) {
@@ -50,7 +51,7 @@ function checkLoginData(req, res, next) {
 function checkNewReservation(req, res, next) {
 
   let validator = new Validator()
-  validator(req.body).required().isObject(obj => {
+  validator(parseNumberFromGroupIfApplic(req.body)).required().isObject(obj => {
     obj('service_id').required().isNumber().integer()
     obj('reservation_date').required().isString().isDate()
     obj('start_time').required().isString()
