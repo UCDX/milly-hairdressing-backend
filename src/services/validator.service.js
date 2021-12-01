@@ -26,9 +26,24 @@ function parseJSONIfApplicable(json) {
   }
 }
 
+function parseNumberFromGroupIfApplic(data) {
+  if(data instanceof Array) {
+    for(let i = 0; i < data.length; i++) {
+      data[i] = parseNumberIfApplicable(data[i])
+    }
+  } else if(data instanceof Object) {
+    for(let key in data) {
+      data[key] = parseNumberIfApplicable(data[key])
+    }
+  }
+
+  return data
+}
+
 module.exports = {
   Validator,
   parseValidatorOutput,
   parseNumberIfApplicable,
-  parseJSONIfApplicable
+  parseJSONIfApplicable,
+  parseNumberFromGroupIfApplic
 }

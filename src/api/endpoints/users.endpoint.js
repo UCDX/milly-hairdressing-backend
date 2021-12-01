@@ -4,5 +4,6 @@ const userFlows = require('../flows/users.flow');
 router.post('/signup', userFlows.signup)
 router.post('/login', userFlows.login)
 router.post('/create-reservation', userFlows.addReservation)
+router.get('/get-user-appointments', userFlows.getUserAppointments)
 
 module.exports = router
