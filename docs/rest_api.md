@@ -578,27 +578,25 @@ GET
   "messages": [
     "Done"
   ],
-  "data": [
-    {
-      "id_reservation": 1,
-      "user_id": 2,
-      "firstname": "Jhon admin",
-      "lastname": "Doe",
-      "reservation_date": "2021-11-22T05:00:00.000Z",
-      "start_time": "10:00:00",
-      "end_time": "11:00:00",
-      "service_id": 1,
-      "service_name": "Manicure Express",
-      "cost": 60,
-      "service_description": "Manicure Express",
-      "service_short_desc": "Manicure Express",
-      "service_duration": 2,
-      "is_service_active": 1
-    }
-  ]
+  "data": {
+    "id_reservation": 1,
+    "user_id": 2,
+    "firstname": "Jhon admin",
+    "lastname": "Doe",
+    "reservation_date": "2021-11-22T05:00:00.000Z",
+    "start_time": "10:00:00",
+    "end_time": "11:00:00",
+    "service_id": 1,
+    "service_name": "Manicure Express",
+    "cost": 60,
+    "service_description": "Manicure Express",
+    "service_short_desc": "Manicure Express",
+    "service_duration": 2,
+    "is_service_active": 1
+  }
 }
 ```
 
 #### Codes
 
- None
+* 1: Forbidden. User unauthorized.

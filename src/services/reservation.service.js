@@ -96,10 +96,11 @@ async function specificReservation(reservation_id) {
     INNER JOIN services
       ON reservations.service_id = services.id
     WHERE reservations.id = ?
+    LIMIT 1
   `
   const result = await mariadb.query(query, [reservation_id])
 
-  return result
+  return result[0]
 }
 
 module.exports = {
