@@ -400,7 +400,7 @@ GET
 
 #### Endpoint
 
-`/api/reservations/blocked-time`
+`/api/reservations/blocked-time/:date`
 
 #### Parameters
 
@@ -453,7 +453,7 @@ GET
 
 #### Endpoint
 
-`/api/reservations/by-day`
+`/api/reservations/by-day/:date`
 
 #### Parameters
 
@@ -564,7 +564,7 @@ GET
 
 #### Endpoint
 
-`/api/reservations/get-specific-reservation`
+`/api/reservations/get-specific-reservation/:reservation_id`
 
 #### Parameters
 
