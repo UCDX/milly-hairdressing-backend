@@ -14,6 +14,7 @@
   * [Get blocked time](#get-blocked-time)
   * [Get reservations of certain day](#get-reservations-of-certain-day)
   * [Delete reservation](#delete-reservation)
+  * [Get specific reservation](#get-specific-reservation)
 
 ## General information
 
@@ -547,3 +548,55 @@ DELETE
 
  * 1: Forbidden. User unauthorized.
  * 2: The day is already passed or is today.
+
+
+### Get specific reservation
+
+Get a specific reservations only by admin/hairdresser users requesting or if the user requesting is the owner of the reservation.
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/api/reservations/get-specific-reservation`
+
+#### Parameters
+
+* `reservation_id`: int.
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "id_reservation": 1,
+    "user_id": 2,
+    "firstname": "Jhon admin",
+    "lastname": "Doe",
+    "reservation_date": "2021-11-22T05:00:00.000Z",
+    "start_time": "10:00:00",
+    "end_time": "11:00:00",
+    "service_id": 1,
+    "service_name": "Manicure Express",
+    "cost": 60,
+    "service_description": "Manicure Express",
+    "service_short_desc": "Manicure Express",
+    "service_duration": 2,
+    "is_service_active": 1
+  }
+}
+```
+
+#### Codes
+
+* 1: Forbidden. User unauthorized.
