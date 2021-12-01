@@ -12,5 +12,11 @@ module.exports = {
     generalMidd.userAuth,
     reservationsMidd.checkDate,
     reservationsCtrl.reservationsByDate 
+  ],
+
+  deleteReservation: [
+    generalMidd.userAuth,
+    reservationsMidd.checkReservationId,
+    reservationsCtrl.deleteReservation
   ]
 }

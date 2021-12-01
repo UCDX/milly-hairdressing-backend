@@ -3,5 +3,6 @@ const reservationFlows = require('../flows/reservations.flow');
 
 router.get('/blocked-time', reservationFlows.getBlockedTime)
 router.get('/by-day', reservationFlows.reservationsByDate)
+router.delete('/cancel-reservation', reservationFlows.deleteReservation)
 
 module.exports = router
