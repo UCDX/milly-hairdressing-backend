@@ -6,6 +6,7 @@
   * [Sign up](#sign-up)
   * [Log in](#log-in)
   * [Create Reservation](#create-reservation)
+  * [Get all user reservations](#get-all-user-reservations)
 * [Hairdressing salon services](#hairdressing-salon-services)
   * [Add service](#add-service)
   * [Get all services](#get-all-services)
@@ -191,6 +192,89 @@ POST
 #### Codes
 
 * 1: Schedule conflict.
+
+### Get all user reservations
+
+Get all the reservations made by the user requesting.
+
+Records are served into groups of a certain size called pages. You can select the group size (with 
+`offset` parameter) and what group get in a call (with `page` parameter).
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+GET
+
+#### Endpoint
+
+`/api/users/get-user-appointments`
+
+#### Parameters
+
+Query params:
+
+* `offset`: int.
+
+The size of the group of records to retrieve. Default value `10` (optional parameter).
+
+* `page`: int.
+
+The number of the group to retrieve. Pages starts at `0`. Default value `0` (optional parameter).
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "reservations": [
+      {
+        "id_reservation": 3,
+        "user_id": 21,
+        "firstname": "Jhon",
+        "lastname": "customer",
+        "reservation_date": "2021-12-03T05:00:00.000Z",
+        "start_time": "12:00:00",
+        "end_time": "13:00:00",
+        "service_id": 20,
+        "service_name": "Corte de cabello para Caballero",
+        "cost": 60,
+        "service_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate ex. Cras id ipsum viverra, fermentum ipsum sed, lacinia ex. Nunc nec neque congue, consectetur massa sit amet, interdum augue. Fusce rutrum sapien vitae mauris aliquet commodo. Integer vel ipsum vitae nisl porttitor lacinia id tincidunt est. ",
+        "service_short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "service_duration": 1,
+        "is_service_active": 1
+      },
+      {
+        "id_reservation": 2,
+        "user_id": 21,
+        "firstname": "Jhon",
+        "lastname": "customer",
+        "reservation_date": "2021-12-02T05:00:00.000Z",
+        "start_time": "13:00:00",
+        "end_time": "16:00:00",
+        "service_id": 24,
+        "service_name": "Aplicación de tinte",
+        "cost": 250,
+        "service_description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis vulputate ex. Cras id ipsum viverra, fermentum ipsum sed, lacinia ex. Nunc nec neque congue, consectetur massa sit amet, interdum augue. Fusce rutrum sapien vitae mauris aliquet commodo. Integer vel ipsum vitae nisl porttitor lacinia id tincidunt est. ",
+        "service_short_desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "service_duration": 3,
+        "is_service_active": 1
+      }
+    ],
+    "total_records": 5
+  }
+}
+```
+
+#### Codes
+
+None
 
 ## Hairdressing salon services
 
