@@ -124,10 +124,50 @@ async function specificReservation(req, res) {
   }
 }
 
+async function updateReservation(req, res) {
+  try {
+    const isUserOwner = await userService.isUserOwner(req.api.user_id, req.params.reservation_id)
+    
+    if (!isUserOwner){
+      return res.status(403).finish({
+        code: 1,
+        messages: ['Forbidden. User unauthorized'],
+        data: {}
+      })
+    }
+
+    const updateResult = await reservationService.updateReservation(
+      req.params.reservation_id,
+      req.body.reservation_date, 
+      req.body.start_time
+    )
+    console.log(updateResult)
+    if(!updateResult){
+      return res.status(400).finish({
+        code: 2,
+        messages: ['Schedule conflict'],
+        data: {}
+      })
+    }
+
+    const reservationData = await reservationService.specificReservation(req.body.reservation_id)
+
+    return res.status(200).finish({
+      code: 0,
+      messages: ['Done'],
+      data: reservationData
+    })
+  } catch (err) {
+    console.error(err)
+    res.status(500).end()
+  }
+}
+
 
 module.exports = {
   getBlockedTime,
   reservationsByDate,
   deleteReservation,
-  specificReservation
+  specificReservation,
+  updateReservation
 }

@@ -103,8 +103,53 @@ async function specificReservation(reservation_id) {
   return result[0]
 }
 
+async function updateReservation(reservation_id, reservation_date, start_time) {
+
+  const serviceDurationQuery = `
+    SELECT services.service_duration 
+    FROM reservations
+    INNER JOIN services 
+      ON reservations.service_id = services.id
+    WHERE reservations.id = ?;
+  `
+  const serviceDurationResult = await mariadb.query(serviceDurationQuery, [reservation_id])
+  const serviceDuration = serviceDurationResult[0].service_duration
+
+  const hourString = start_time.slice(0, 2)
+  const endHourInt = parseInt(hourString) + serviceDuration
+  let end_time
+  if(endHourInt < 10)
+    end_time = '0' + String(endHourInt) + ':00:00'
+  else
+    end_time = String(endHourInt) + ':00:00'
+
+  const reservationsQuery = "SELECT * FROM reservations WHERE reservation_date = ?";
+  const reservationsResult = await mariadb.query(reservationsQuery,[reservation_date])
+  
+  for (const reservation of reservationsResult) {
+    if (start_time < reservation.end_time && end_time > reservation.start_time){
+      return null
+    }
+  }
+
+  const updateReservationQuery = `
+    UPDATE reservations
+    SET 
+      reservation_date = ?,
+      start_time = ?,
+      end_time = ?
+    WHERE id = ?;
+  `
+
+  let arguments = [reservation_date, start_time, end_time, reservation_id]
+  const result = await mariadb.query(updateReservationQuery, arguments)
+
+  return result
+}
+
 module.exports = {
   getReservations,
   deleteReservation,
-  specificReservation
+  specificReservation,
+  updateReservation
 }

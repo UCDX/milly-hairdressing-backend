@@ -19,9 +19,17 @@ module.exports = {
     reservationsMidd.checkReservationId,
     reservationsCtrl.deleteReservation
   ],
+
   getSpecificReservation: [
     generalMidd.userAuth,
     reservationsMidd.checkReservationId,
     reservationsCtrl.specificReservation
+  ],
+
+  updateReservation: [
+    generalMidd.userAuth,
+    reservationsMidd.checkReservationIdReqParam,
+    reservationsMidd.checkUpdateParams,
+    reservationsCtrl.updateReservation
   ]
 }
