@@ -7,6 +7,7 @@
   * [Log in](#log-in)
   * [Create Reservation](#create-reservation)
   * [Get all user reservations](#get-all-user-reservations)
+  * [Delete reservation](#delete-reservation)
 * [Hairdressing salon services](#hairdressing-salon-services)
   * [Add service](#add-service)
   * [Get all services](#get-all-services)
@@ -276,6 +277,45 @@ The number of the group to retrieve. Pages starts at `0`. Default value `0` (opt
 #### Codes
 
 None
+
+### Delete reservation
+
+Delete reservations only by admin/hairdresser users requesting or if the user requesting is the owner of the reservation.
+
+#### Headers
+
+* `Authorization`
+
+#### Method
+
+DELETE
+
+#### Endpoint
+
+`/api/users/cancel-reservations`
+
+#### Parameters
+
+* `reservation_id`: int.
+
+#### Response example
+
+```json
+{
+  "code": 0,
+  "messages": [
+    "Done"
+  ],
+  "data": {
+    "reservation_id": 21
+  }
+}
+```
+
+#### Codes
+
+ * 1: Forbidden. User unauthorized.
+ * 2: The day is already passed or is today.
 
 ## Hairdressing salon services
 
